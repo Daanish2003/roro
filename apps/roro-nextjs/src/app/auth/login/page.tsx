@@ -1,10 +1,8 @@
-import React from 'react'
-import { AuthCard } from 'apps/roro-nextjs/src/features/auth/auth-card'
+import React from "react";
+import { AuthCard } from "~features/auth/auth-card";
 
 const LoginPage = () => {
-  return (
-    <AuthCard />
-  )
-}
+	return <AuthCard />;
+};
 
-export default LoginPage
+export default LoginPage;

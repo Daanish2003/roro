@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function MyTopicsPage() {
-  return (
-    <div>MyTopicsPage</div>
-  )
+	return <div>MyTopicsPage</div>;
 }

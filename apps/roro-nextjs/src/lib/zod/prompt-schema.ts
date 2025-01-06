@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const PromptSchema = z.object({
-    prompt: z.string().min(1)
-})
+	prompt: z.string().min(1),
+});
 
-export type PromptSchemaType = z.infer<typeof PromptSchema>
+export type PromptSchemaType = z.infer<typeof PromptSchema>;

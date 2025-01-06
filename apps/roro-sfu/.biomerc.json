@@ -1,0 +1,12 @@
+{
+    "files": ["src/**/*.ts"],
+    "formatter": {
+      "enabled": true
+    },
+    "linter": {
+      "rules": {
+        "node/no-unsupported-features/es-syntax": "off"
+      }
+    }
+  }
+  

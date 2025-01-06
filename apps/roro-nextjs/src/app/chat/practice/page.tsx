@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function PracticePage() {
-  return (
-    <div>PracticePage</div>
-  )
+	return <div>PracticePage</div>;
 }
