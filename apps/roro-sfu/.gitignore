@@ -2,10 +2,10 @@
 
 # dependencies
 /node_modules
+node_modules
 /.pnp
 .pnp.js
 /dist
-node_modules
 
 # testing
 /coverage
@@ -40,7 +40,6 @@ yarn-error.log*
 
 # vercel
 .vercel
-.next
 
 # typescript
 *.tsbuildinfo
