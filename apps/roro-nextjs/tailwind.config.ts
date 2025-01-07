@@ -1,13 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable prefer-const */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-require-imports */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 import { fontFamily } from "tailwindcss/defaultTheme";
+import type { PluginAPI } from "tailwindcss/types/config";
 
 const svgToDataUri = require("mini-svg-data-uri");
 
@@ -16,7 +10,7 @@ const {
 	default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
-function addVariablesForColors({ addBase, theme }: any) {
+function addVariablesForColors({ addBase, theme }: PluginAPI) {
 	const allColors = flattenColorPalette(theme("colors"));
 	const newVars = Object.fromEntries(
 		Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),

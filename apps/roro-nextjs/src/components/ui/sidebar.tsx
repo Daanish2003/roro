@@ -16,8 +16,8 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "~/components/ui/tooltip";
-import { useIsMobile } from "~hooks/use-mobile";
-import { cn } from "~lib/utils";
+import { useIsMobile } from "~/hooks/use-mobile";
+import { cn } from "~/lib/utils";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -90,7 +90,8 @@ const SidebarProvider = React.forwardRef<
 		);
 
 		// Helper to toggle the sidebar.
-		const toggleSidebar = React.useCallback(() => {
+		// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+				const toggleSidebar = React.useCallback(() => {
 			return isMobile
 				? setOpenMobile((open) => !open)
 				: setOpen((open) => !open);
@@ -116,6 +117,7 @@ const SidebarProvider = React.forwardRef<
 		// This makes it easier to style the sidebar with Tailwind classes.
 		const state = open ? "expanded" : "collapsed";
 
+		// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 		const contextValue = React.useMemo<SidebarContext>(
 			() => ({
 				state,

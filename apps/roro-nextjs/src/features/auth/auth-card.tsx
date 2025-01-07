@@ -13,8 +13,8 @@ import {
 	CardHeader,
 	CardTitle,
 } from "~/components/ui/card";
-import { useToast } from "~hooks/use-toast";
-import { authClient } from "~lib/auth-client";
+import { useToast } from "~/hooks/use-toast";
+import { authClient } from "~/lib/auth-client";
 
 export function AuthCard() {
 	const { toast } = useToast();
@@ -25,7 +25,7 @@ export function AuthCard() {
 			await authClient.signIn.social(
 				{
 					provider: provider,
-					callbackURL: "/profile/overview",
+					callbackURL: '/chat'
 				},
 				{
 					onSuccess: () => {

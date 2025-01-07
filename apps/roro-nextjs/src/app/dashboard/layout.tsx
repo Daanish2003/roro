@@ -1,5 +1,6 @@
 import type React from "react";
 import { AppSidebar } from "~/components/app-sidebar";
+import MainNavbar from "~/components/main-navbar";
 import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
 
 export default function DashboardLayout({
@@ -8,7 +9,12 @@ export default function DashboardLayout({
 	return (
 		<SidebarProvider>
 			<AppSidebar />
-			<SidebarInset>{children}</SidebarInset>
+			<SidebarInset>
+				<div className="w-auto">
+					<MainNavbar />
+				</div>
+				{children}
+			</SidebarInset>
 		</SidebarProvider>
 	);
 }

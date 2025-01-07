@@ -14,7 +14,7 @@ export default function NavLink({
 		<Link
 			href={href}
 			className={`text-sm py-3 px-6 items-center flex rounded-lg mx-3 mt-2 ${
-				pathname === href ? "bg-primary" : " hover:bg-primary/10"
+				pathname === href ? "bg-primary text-black" : " hover:bg-primary/10"
 			}`}
 		>
 			{icon}
