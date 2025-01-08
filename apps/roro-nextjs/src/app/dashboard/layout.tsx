@@ -3,9 +3,11 @@ import { AppSidebar } from "~/components/app-sidebar";
 import MainNavbar from "~/components/main-navbar";
 import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
 	children,
-}: { children: React.ReactNode }) {
+}: { 
+	children: React.ReactNode
+}) {
 	return (
 		<SidebarProvider>
 			<AppSidebar />

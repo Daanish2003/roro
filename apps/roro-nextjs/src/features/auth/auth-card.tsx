@@ -25,7 +25,7 @@ export function AuthCard() {
 			await authClient.signIn.social(
 				{
 					provider: provider,
-					callbackURL: '/chat'
+					callbackURL: '/dashboard/overview'
 				},
 				{
 					onSuccess: () => {

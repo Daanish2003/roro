@@ -11,7 +11,7 @@ export default function PracticeButton() {
     const startPracticeSessionHandler = () => {
         const roomId = uuidv4()
 
-        router.push(`/dashboard/practice/room?roomId=${roomId}`)
+        router.push(`/room/${roomId}`)
     }
   
   return (

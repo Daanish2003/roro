@@ -4,7 +4,7 @@ import React from "react";
 
 const Logo = () => {
 	return (
-		<Link href="/dashboard/overview" className="flex px-2 py-1 hover:bg-primary/10 rounded-md">
+		<Link href="/dashboard/overview" className="flex px-2 py-1 hover:bg-primary/10 rounded-md w-[85px]">
 			<span className={"font-bold text-xl"}>Roro.ai</span>
 			<span className={"font-bold text-xl hidden"}>Rr</span>
 		</Link>

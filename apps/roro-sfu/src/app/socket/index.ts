@@ -1,6 +1,5 @@
 import { Server } from "socket.io"
-import { Server as HttpServer } from "http"
-import { router } from "../mediasoup"
+import type { Server as HttpServer } from "node:http"
 import { createWebRtcTransport } from "../mediasoup/createWebRtcTransport"
 
 
@@ -20,7 +19,7 @@ export const initializeSocket  = async (server: HttpServer) => {
       console.log(`Client joined room: ${roomId}`);
 
       // create a transport for the client
-      const transport = await createWebRtcTransport(router);
+      const transport = await createWebRtcTransport();
       callback({ transportOptions: transport});
 
     
