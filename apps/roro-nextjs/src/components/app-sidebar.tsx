@@ -1,173 +1,104 @@
 "use client";
 
-import {
-	AudioWaveform,
-	BookOpen,
-	Bot,
-	Command,
-	Frame,
-	GalleryVerticalEnd,
-	Map,
-	PieChart,
-	Settings2,
-	SquareTerminal,
-} from "lucide-react";
 import type * as React from "react";
 
-import { NavMain } from "~/components/nav-main";
-import { NavProjects } from "~/components/nav-projects";
-import { NavUser } from "~/components/nav-user";
 import {
 	Sidebar,
 	SidebarContent,
 	SidebarFooter,
+	SidebarGroup,
+	SidebarGroupContent,
+	SidebarGroupLabel,
 	SidebarHeader,
+	SidebarMenu,
+	SidebarMenuButton,
+	SidebarMenuItem,
 	SidebarRail,
 	SidebarTrigger,
 } from "~/components/ui/sidebar";
+import { BookOpen, Flag, Globe, LayoutDashboard, ListTodo, Settings } from "lucide-react";
+import Logo from "./logo";
+import { NavUser } from "./nav-user";
+import { useSession } from "~/lib/auth-client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-// This is sample data.
-const data = {
-	user: {
-		name: "shadcn",
-		email: "m@example.com",
-		avatar: "",
+const items = [
+	{
+	  title: "Overview",
+	  url: "/dashboard/overview",
+	  icon: LayoutDashboard,
 	},
-	teams: [
-		{
-			name: "Acme Inc",
-			logo: GalleryVerticalEnd,
-			plan: "Enterprise",
-		},
-		{
-			name: "Acme Corp.",
-			logo: AudioWaveform,
-			plan: "Startup",
-		},
-		{
-			name: "Evil Corp.",
-			logo: Command,
-			plan: "Free",
-		},
-	],
-	navMain: [
-		{
-			title: "Playground",
-			url: "#",
-			icon: SquareTerminal,
-			isActive: true,
-			items: [
-				{
-					title: "History",
-					url: "#",
-				},
-				{
-					title: "Starred",
-					url: "#",
-				},
-				{
-					title: "Settings",
-					url: "#",
-				},
-			],
-		},
-		{
-			title: "Models",
-			url: "#",
-			icon: Bot,
-			items: [
-				{
-					title: "Genesis",
-					url: "#",
-				},
-				{
-					title: "Explorer",
-					url: "#",
-				},
-				{
-					title: "Quantum",
-					url: "#",
-				},
-			],
-		},
-		{
-			title: "Documentation",
-			url: "#",
-			icon: BookOpen,
-			items: [
-				{
-					title: "Introduction",
-					url: "#",
-				},
-				{
-					title: "Get Started",
-					url: "#",
-				},
-				{
-					title: "Tutorials",
-					url: "#",
-				},
-				{
-					title: "Changelog",
-					url: "#",
-				},
-			],
-		},
-		{
-			title: "Settings",
-			url: "#",
-			icon: Settings2,
-			items: [
-				{
-					title: "General",
-					url: "#",
-				},
-				{
-					title: "Team",
-					url: "#",
-				},
-				{
-					title: "Billing",
-					url: "#",
-				},
-				{
-					title: "Limits",
-					url: "#",
-				},
-			],
-		},
-	],
-	projects: [
-		{
-			name: "Design Engineering",
-			url: "#",
-			icon: Frame,
-		},
-		{
-			name: "Sales & Marketing",
-			url: "#",
-			icon: PieChart,
-		},
-		{
-			name: "Travel",
-			url: "#",
-			icon: Map,
-		},
-	],
-};
+	{
+	  title: "Practice",
+	  url: "/dashboard/practice",
+	  icon: BookOpen,
+	},
+	{
+	  title: "Feedback",
+	  url: "/dashboard/feedback",
+	  icon: Flag,
+	},
+	{
+		title: "My Topics",
+		url: "/dashboard/my-topics",
+		icon: ListTodo
+	},
+	{
+	  title: "Explore",
+	  url: "/dashboard/explore",
+	  icon: Globe,
+	},
+	{
+	  title: "Settings",
+	  url: "/dashboard/settings",
+	  icon: Settings,
+	},
+  ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+	const pathname = usePathname()
+	const {data: session} = useSession();
+
+	if (!session?.user) {
+		return null;
+	  }
+	
+	  const user = {
+		name: session.user.name ?? '',
+		email: session.user.email ?? '',
+		avatar: session.user.image ?? '/default-avatar.png' // Provide a default avatar URL
+	  }
+
+
 	return (
 		<Sidebar collapsible="icon" {...props}>
 			<SidebarHeader>
-				<SidebarTrigger />
+			     <NavUser user={user}/>
 			</SidebarHeader>
 			<SidebarContent>
-				<NavMain items={data.navMain} />
-				<NavProjects projects={data.projects} />
+			<SidebarGroup>
+          <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild 
+				  isActive={pathname.startsWith(item.url)}
+				  >
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
 			</SidebarContent>
 			<SidebarFooter>
-				<NavUser user={data.user} />
+				
 			</SidebarFooter>
 			<SidebarRail />
 		</Sidebar>

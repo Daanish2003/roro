@@ -1,7 +1,6 @@
-import mediasoup from "mediasoup";
-import { Router, RtpCodecCapability, WorkerSettings } from "mediasoup/node/lib/types";
+import type { RouterOptions, RtpCodecCapability, WorkerSettings } from "mediasoup/node/lib/types";
 
-const workerSettings: WorkerSettings = {
+export const workerSettings: WorkerSettings = {
   logLevel: "warn",
   rtcMinPort: 10000,
   rtcMaxPort: 10100,
@@ -9,28 +8,26 @@ const workerSettings: WorkerSettings = {
 
 const mediaCodecs: RtpCodecCapability[] = [
   {
-    kind: "audio",
-    mimeType: "audio/opus",
+    kind: 'audio',
+    mimeType: 'audio/opus',
     clockRate: 48000,
     channels: 2,
+    parameters: {},
+    rtcpFeedback: []
   },
   {
-    kind: "video",
-    mimeType: "video/VP8",
+    kind: 'video',
+    mimeType: 'video/VP8',
     clockRate: 90000,
-  },
+    parameters: {},
+    rtcpFeedback: [
+      { type: 'nack' },
+      { type: 'nack', parameter: 'pli' },
+      { type: 'ccm', parameter: 'fir' }
+    ]
+  }
 ];
 
-let worker;
-let router: Router;
-
-export const createWorker = async () => {
-  worker = await mediasoup.createWorker(workerSettings);
-  worker.on(`died`, () => {
-    console.error(`MediaSoup worker has died`);
-  });
-
-  router = await worker.createRouter({ mediaCodecs});
+export const routerOptions: RouterOptions = {
+  mediaCodecs
 };
-
-export { router, worker };
